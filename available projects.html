@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Projects - InvestHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#0f172a',
+                        accent: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Currency Ticker -->
+    <div class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-2 overflow-hidden">
+        <div class="animate-marquee whitespace-nowrap" id="currencyTicker">
+            <span class="inline-block px-8">
+                <span class="font-semibold">RWF/USD:</span> <span id="rwf-rate">1,300.45</span>
+                <span class="mx-4">|</span>
+                <span class="font-semibold">GBP/USD:</span> <span id="gbp-rate">1.2689</span>
+                <span class="mx-4">|</span>
+                <span class="font-semibold">NGN/USD:</span> <span id="ngn-rate">775.20</span>
+                <span class="mx-4">|</span>
+                <span class="font-semibold">KES/USD:</span> <span id="kes-rate">129.85</span>
+                <span class="mx-4">|</span>
+                <span class="font-semibold">UGX/USD:</span> <span id="ugx-rate">3,725.50</span>
+                <span class="mx-4">|</span>
+                <span class="font-semibold">FBU/USD:</span> <span id="fbu-rate">2,850.75</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">IH</span>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">InvestHub</span>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="home-pg.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="available projects.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Available Projects</a>
+                    <a href="investment.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Investment</a>
+                    <button id="currencyBtn" class="text-gray-700 hover:text-blue-600 font-medium transition-colors flex items-center">
+                        Currency
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-blue-600 hover:text-blue-800 font-medium transition-colors">Sign In</button>
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+     <!-- Currency Dropdown -->
+        <div id="currencyDropdown" class="hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t z-40">
+            <div class="container mx-auto px-6 py-6">
+                <h3 class="text-lg font-semibold mb-4">Live Currency Rates</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-blue-600">RWF</div>
+                        <div class="text-sm text-gray-600">Rwandan Franc</div>
+                        <div class="text-lg font-semibold mt-2">1,300.45</div>
+                        <div class="text-xs text-green-600">+0.12%</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-green-600">USD</div>
+                        <div class="text-sm text-gray-600">US Dollar</div>
+                        <div class="text-lg font-semibold mt-2">1.00</div>
+                        <div class="text-xs text-gray-500">Base</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-600">GBP</div>
+                        <div class="text-sm text-gray-600">British Pound</div>
+                        <div class="text-lg font-semibold mt-2">1.2689</div>
+                        <div class="text-xs text-red-600">-0.08%</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-orange-600">NGN</div>
+                        <div class="text-sm text-gray-600">Nigerian Naira</div>
+                        <div class="text-lg font-semibold mt-2">775.20</div>
+                        <div class="text-xs text-green-600">+0.25%</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-red-600">KES</div>
+                        <div class="text-sm text-gray-600">Kenyan Shilling</div>
+                        <div class="text-lg font-semibold mt-2">129.85</div>
+                        <div class="text-xs text-green-600">+0.15%</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-yellow-600">UGX</div>
+                        <div class="text-sm text-gray-600">Ugandan Shilling</div>
+                        <div class="text-lg font-semibold mt-2">3,725.50</div>
+                        <div class="text-xs text-red-600">-0.05%</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-indigo-600">FBU</div>
+                        <div class="text-sm text-gray-600">Burundian Franc</div>
+                        <div class="text-lg font-semibold mt-2">2,850.75</div>
+                        <div class="text-xs text-green-600">+0.18%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4">Available Investment Projects</h1>
+                <p class="text-xl text-gray-200 mb-8">Discover verified investment opportunities across Africa</p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <span class="font-semibold">127</span> Active Projects
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <span class="font-semibold">$2.4M</span> Total Funding
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <span class="font-semibold">15.2%</span> Avg. ROI
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters and Search -->
+    <section class="py-8 bg-white border-b">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <!-- Search -->
+                <div class="flex-1 max-w-md">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search projects..."
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                        <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4">
+                    <select id="sectorFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Sectors</option>
+                        <option value="agriculture">Agriculture</option>
+                        <option value="technology">Technology</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="renewable-energy">Renewable Energy</option>
+                        <option value="healthcare">Healthcare</option>
+                    </select>
+
+                    <select id="countryFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Countries</option>
+                        <option value="rwanda">Rwanda</option>
+                        <option value="kenya">Kenya</option>
+                        <option value="uganda">Uganda</option>
+                        <option value="nigeria">Nigeria</option>
+                        <option value="burundi">Burundi</option>
+                    </select>
+
+                    <select id="roiFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All ROI</option>
+                        <option value="low">5-10%</option>
+                        <option value="medium">10-15%</option>
+                        <option value="high">15-20%</option>
+                        <option value="premium">20%+</option>
+                    </select>
+
+                    <select id="sortBy" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="newest">Newest First</option>
+                        <option value="roi-high">Highest ROI</option>
+                        <option value="roi-low">Lowest ROI</option>
+                        <option value="funding-high">Highest Funding</option>
+                        <option value="duration-short">Shortest Duration</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project cards will be inserted here by JavaScript -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                    Load More Projects
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-screen overflow-y-auto">
+            <div id="modalContent">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+
+    <script>
+        // Sample project data
+        const projects = [
+            {
+                id: 1,
+                title: "Rwanda Coffee Premium Export",
+                sector: "agriculture",
+                country: "rwanda",
+                roi: 14.5,
+                duration: 18,
+                minInvestment: 500,
+                totalFunding: 150000,
+                currentFunding: 120000,
+                description: "Premium Arabica coffee cultivation and export project in Nyungwe National Park region with guaranteed international buyer contracts.",
+                riskLevel: "Medium",
+                fundingGoal: 150000,
+                investors: 45,
+                status: "Active",
+                features: ["Organic Certification", "Fair Trade", "Climate Resilient", "Export Contracts"],
+                timeline: [
+                    { phase: "Planting & Setup", duration: "Months 1-3", status: "completed" },
+                    { phase: "Growth & Maintenance", duration: "Months 4-12", status: "active" },
+                    { phase: "Harvest & Processing", duration: "Months 13-15", status: "pending" },
+                    { phase: "Export & Returns", duration: "Months 16-18", status: "pending" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Nairobi Fintech Mobile Banking",
+                sector: "technology",
+                country: "kenya",
+                roi: 22.8,
+                duration: 24,
+                minInvestment: 1000,
+                totalFunding: 500000,
+                currentFunding: 320000,
+                description: "Revolutionary mobile banking platform targeting underbanked populations across East Africa with AI-powered financial services.",
+                riskLevel: "High",
+                fundingGoal: 500000,
+                investors: 78,
+                status: "Active",
+                features: ["AI-Powered", "Mobile First", "Regulatory Approved", "Multi-Currency"],
+                timeline: [
+                    { phase: "MVP Development", duration: "Months 1-6", status: "completed" },
+                    { phase: "Beta Testing", duration: "Months 7-12", status: "active" },
+                    { phase: "Market Launch", duration: "Months 13-18", status: "pending" },
+                    { phase: "Scale & Exit", duration: "Months 19-24", status: "pending" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Kigali Green Residential Complex",
+                sector: "real-estate",
+                country: "rwanda",
+                roi: 16.2,
+                duration: 36,
+                minInvestment: 2000,
+                totalFunding: 800000,
+                currentFunding: 600000,
+                description: "Eco-friendly residential development in Kigali's business district featuring solar energy and modern amenities.",
+                riskLevel: "Low",
+                fundingGoal: 800000,
+                investors: 32,
+                status: "Active",
+                features: ["Solar Powered", "Modern Design", "Prime Location", "Pre-sold Units"],
+                timeline: [
+                    { phase: "Land Acquisition", duration: "Months 1-3", status: "completed" },
+                    { phase: "Construction Phase 1", duration: "Months 4-18", status: "active" },
+                    { phase: "Construction Phase 2", duration: "Months 19-30", status: "pending" },
+                    { phase: "Sales & Handover", duration: "Months 31-36", status: "pending" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Lagos Manufacturing Hub",
+                sector: "manufacturing",
+                country: "nigeria",
+                roi: 18.5,
+                duration: 30,
+                minInvestment: 1500,
+                totalFunding: 1200000,
+                currentFunding: 850000,
+                description: "State-of-the-art textile manufacturing facility serving West African markets with sustainable production methods.",
+                riskLevel: "Medium",
+                fundingGoal: 1200000,
+                investors: 56,
+                status: "Active",
+                features: ["Sustainable Methods", "Export Ready", "Modern Equipment", "Local Employment"],
+                timeline: [
+                    { phase: "Facility Setup", duration: "Months 1-8", status: "active" },
+                    { phase: "Equipment Installation", duration: "Months 9-15", status: "pending" },
+                    { phase: "Production Start", duration: "Months 16-24", status: "pending" },
+                    { phase: "Full Operations", duration: "Months 25-30", status: "pending" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Uganda Solar Farm Initiative",
+                sector: "renewable-energy",
+                country: "uganda",
+                roi: 13.7,
+                duration: 48,
+                minInvestment: 3000,
+                totalFunding: 2000000,
+                currentFunding: 1400000,
+                description: "Large-scale solar energy project providing clean electricity to rural communities and industrial clients.",
+                riskLevel: "Low",
+                fundingGoal: 2000000,
+                investors: 89,
+                status: "Active",
+                features: ["Government Backed", "20-Year Contracts", "Clean Energy", "Rural Impact"],
+                timeline: [
+                    { phase: "Site Preparation", duration: "Months 1-6", status: "completed" },
+                    { phase: "Solar Installation", duration: "Months 7-18", status: "active" },
+                    { phase: "Grid Connection", duration: "Months 19-24", status: "pending" },
+                    { phase: "Operations", duration: "Months 25-48", status: "pending" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Bujumbura Healthcare Center",
+                sector: "healthcare",
+                country: "burundi",
+                roi: 11.8,
+                duration: 24,
+                minInvestment: 800,
+                totalFunding: 300000,
+                currentFunding: 180000,
+                description: "Modern healthcare facility providing essential medical services to underserved communities in Bujumbura.",
+                riskLevel: "Low",
+                fundingGoal: 300000,
+                investors: 67,
+                status: "Active",
+                features: ["Community Impact", "Modern Equipment", "Trained Staff", "Insurance Partnerships"],
+                timeline: [
+                    { phase: "Construction", duration: "Months 1-8", status: "active" },
+                    { phase: "Equipment Setup", duration: "Months 9-12", status: "pending" },
+                    { phase: "Staff Training", duration: "Months 13-15", status: "pending" },
+                    { phase: "Operations", duration: "Months 16-24", status: "pending" }
+                ]
+            }
+        ];
+
+        let currentProjects = [...projects];
+        let displayedProjects = 6;
+
+        // Currency rates simulation
+        const currencyRates = {
+            'rwf-rate': { base: 1300.45, volatility: 5 },
+            'gbp-rate': { base: 1.2689, volatility: 0.01 },
+            'ngn-rate': { base: 775.20, volatility: 10 },
+            'kes-rate': { base: 129.85, volatility: 2 },
+            'ugx-rate': { base: 3725.50, volatility: 50 },
+            'fbu-rate': { base: 2850.75, volatility: 30 }
+        };
+
+        function updateCurrencyRates() {
+            Object.keys(currencyRates).forEach(id => {
+                const rate = currencyRates[id];
+                const change = (Math.random() - 0.5) * rate.volatility;
+                const newRate = rate.base + change;
+                rate.base = newRate;
+                
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = newRate.toFixed(2);
+                }
+            });
+        }
+
+        setInterval(updateCurrencyRates, 5000);
+
+        function getSectorColor(sector) {
+            const colors = {
+                'agriculture': 'from-green-500 to-green-600',
+                'technology': 'from-blue-500 to-blue-600',
+                'real-estate': 'from-purple-500 to-purple-600',
+                'manufacturing': 'from-orange-500 to-orange-600',
+                'renewable-energy': 'from-yellow-500 to-yellow-600',
+                'healthcare': 'from-red-500 to-red-600'
+            };
+            return colors[sector] || 'from-gray-500 to-gray-600';
+        }
+
+        function getSectorBadgeColor(sector) {
+            const colors = {
+                'agriculture': 'bg-green-100 text-green-800',
+                'technology': 'bg-blue-100 text-blue-800',
+                'real-estate': 'bg-purple-100 text-purple-800',
+                'manufacturing': 'bg-orange-100 text-orange-800',
+                'renewable-energy': 'bg-yellow-100 text-yellow-800',
+                'healthcare': 'bg-red-100 text-red-800'
+            };
+            return colors[sector] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getRiskColor(risk) {
+            const colors = {
+                'Low': 'text-green-600',
+                'Medium': 'text-yellow-600',
+                'High': 'text-red-600'
+            };
+            return colors[risk] || 'text-gray-600';
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', { 
+                style: 'currency', 
+                currency: 'USD',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function createProjectCard(project) {
+            const fundingProgress = (project.currentFunding / project.fundingGoal) * 100;
+            
+            return `
+                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer" onclick="showProjectDetails(${project.id})">
+                    <div class="h-48 bg-gradient-to-br ${getSectorColor(project.sector)} relative">
+                        <div class="absolute top-4 left-4">
+                            <span class="${getSectorBadgeColor(project.sector)} px-3 py-1 rounded-full text-sm font-medium capitalize">
+                                ${project.sector.replace('-', ' ')}
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                ${project.country.charAt(0).toUpperCase() + project.country.slice(1)}
+                            </span>
+                        </div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <div class="text-3xl font-bold">${project.roi}%</div>
+                            <div class="text-sm opacity-90">Expected ROI</div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">${project.title}</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">${project.description}</p>
+                        
+                        <div class="space-y-3 mb-4">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-gray-500">Funding Progress</span>
+                                <span class="font-semibold">${Math.round(fundingProgress)}%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: ${fundingProgress}%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600">
+                                <span>${formatCurrency(project.currentFunding)} raised</span>
+                                <span>${formatCurrency(project.fundingGoal)} goal</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                            <div>
+                                <div class="text-gray-500">Min. Investment</div>
+                                <div class="font-semibold">${formatCurrency(project.minInvestment)}</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500">Duration</div>
+                                <div class="font-semibold">${project.duration} months</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500">Risk Level</div>
+                                <div class="font-semibold ${getRiskColor(project.riskLevel)}">${project.riskLevel}</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500">Investors</div>
+                                <div class="font-semibold">${project.investors}</div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r ${getSectorColor(project.sector)} text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showProjectDetails(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            const fundingProgress = (project.currentFunding / project.fundingGoal) * 100;
+            
+            const modalContent = `
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-2">${project.title}</h2>
+                            <div class="flex items-center space-x-4">
+                                <span class="${getSectorBadgeColor(project.sector)} px-3 py-1 rounded-full text-sm font-medium capitalize">
+                                    ${project.sector.replace('-', ' ')}
+                                </span>
+                                <span class="text-gray-600">${project.country.charAt(0).toUpperCase() + project.country.slice(1)}</span>
+                                <span class="${getRiskColor(project.riskLevel)} font-semibold">${project.riskLevel} Risk</span>
+                            </div>
+                        </div>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold">×</button>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2">
+                            <div class="h-64 bg-gradient-to-br ${getSectorColor(project.sector)} rounded-2xl mb-6 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                                <div class="absolute bottom-6 left-6 text-white">
+                                    <div class="text-4xl font-bold">${project.roi}%</div>
+                                    <div class="text-lg opacity-90">Expected Annual ROI</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3 class="text-xl font-bold mb-3">Project Description</h3>
+                                <p class="text-gray-600 leading-relaxed">${project.description}</p>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3 class="text-xl font-bold mb-3">Key Features</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${project.features.map(feature => `
+                                        <div class="flex items-center space-x-2">
+                                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700">${feature}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3 class="text-xl font-bold mb-3">Project Timeline</h3>
+                                <div class="space-y-4">
+                                    ${project.timeline.map((phase, index) => `
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-8 h-8 rounded-full flex items-center justify-center ${
+                                                phase.status === 'completed' ? 'bg-green-500 text-white' :
+                                                phase.status === 'active' ? 'bg-blue-500 text-white' :
+                                                'bg-gray-300 text-gray-600'
+                                            }">
+                                                ${index + 1}
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="font-semibold text-gray-800">${phase.phase}</div>
+                                                <div class="text-sm text-gray-600">${phase.duration}</div>
+                                            </div>
+                                            <div class="px-3 py-1 rounded-full text-xs font-medium ${
+                                                phase.status === 'completed' ? 'bg-green-100 text-green-800' :
+                                                phase.status === 'active' ? 'bg-blue-100 text-blue-800' :
+                                                'bg-gray-100 text-gray-600'
+                                            }">
+                                                ${phase.status.charAt(0).toUpperCase() + phase.status.slice(1)}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 rounded-2xl p-6">
+                                <h3 class="text-lg font-bold mb-4">Investment Summary</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Expected ROI</span>
+                                        <span class="font-bold text-green-600">${project.roi}%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Duration</span>
+                                        <span class="font-semibold">${project.duration} months</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Min. Investment</span>
+                                        <span class="font-semibold">${formatCurrency(project.minInvestment)}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Risk Level</span>
+                                        <span class="font-semibold ${getRiskColor(project.riskLevel)}">${project.riskLevel}</span
+
+ <!-- CTA Section -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Investment Journey?</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Join thousands of successful investors who trust Invest HUB with their financial future.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors pulse-animation">
+                    Open Account Now
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                    Schedule Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">Invest HUB</h3>
+                    <p class="text-gray-300">Your trusted partner in wealth creation and financial growth.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Portfolio Management</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Financial Planning</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Investment Advisory</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Retirement Planning</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Our Team</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p>📧 info@investhub.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Invest HUB. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </body<
